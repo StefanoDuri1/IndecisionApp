@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="" alt="bg-image">
+        <img :src="img" alt="bg-image">
         <div class="bg-dark"></div>
 
         <div class="indecision-container">
@@ -34,6 +34,7 @@ export default {
             const { answer, image } = result
 
             this.answer = answer
+            this.img = image
         }
     },
     watch: {
