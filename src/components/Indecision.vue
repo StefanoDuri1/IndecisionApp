@@ -1,13 +1,13 @@
 <template>
     <div>
-        <img :src="img" alt="bg-image">
+        <img v-if="img" :src="img" alt="bg-image">
         <div class="bg-dark"></div>
 
         <div class="indecision-container">
             <input type="text" placeholder="Make me a question" v-model="question">
             <p>Remember to end with a question mark (?) </p>
 
-            <div>
+            <div v-if="isValidQuestion">
                 <h2>{{ question }}</h2>
                 <h1>{{ answer }}</h1>
             </div>
@@ -20,7 +20,9 @@ export default {
     data() {
         return {
             question: null,
-            answer: null
+            answer: null,
+            img: null,
+            isValidQuestion: false
         }
     },
     methods: {
@@ -39,7 +41,12 @@ export default {
     },
     watch: {
         question( value, oldValue ) {
+
+            this.isValidQuestion = false
+
             if(!value.includes('?')) return
+
+            this.isValidQuestion = true
 
             this.getAnswer()
         }
